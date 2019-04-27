@@ -1,0 +1,54 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="./css/table.css">
+</head>
+
+<body style="height:100vh; background-color: #7f5a83;
+background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+">
+    <%- include('includes/navigation.ejs') %>
+<div style="margin-top:80px">
+    
+    <table>
+        <caption style="text-align: center; color:white">Delete any row by clicking delete in last row</caption>
+        <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Password</th>
+                <th scope="col">Phone no.</th>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(item of user) { %>
+            <tr>
+                <td data-label="Email" style="word-break: break-all"><%= item.emailId || ' ' %></td>
+                <td data-label="User Name" style="word-break: break-all"> <%= item.userName || ' '%> </td>
+                <td data-label="Pssword" style="word-break: break-all"> <%= item.password || ' '%> </td>
+                <td data-label="Phone" style="word-break: break-all"> <%= item.phoneNo || ' '%></td>
+                <td data-label="Date/Time" style="word-break: break-all"> <% if(item.dateTime) { %> <% item.dateTime=item.dateTime.toString().split('GMT')[0] %><%= item.dateTime %> <% }%></td>
+                <td data-label="Delete"> <form action="/deleteUser/<%= item.emailId %>?page=<%=currentPage %>" method="POST"><input type=submit value="Delete" style="width:70px; background-color: black" ></form> </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <section class="pagination" style="position:relative; left:50%; transform: translate(-50%,-50%)">
+            <% if (currentPage !== 1 && previousPage !== 1) { %>
+                <a href="?page=1">First Page</a>
+            <% } %>
+            <% if (hasPreviousPage) { %>
+                <a href="?page=<%= previousPage %>"><%= previousPage %></a>
+            <% } %>
+            <a href="?page=<%= currentPage %>" class="active"><%= currentPage %></a>
+            <% if (hasNextPage) { %>
+                <a href="?page=<%= nextPage %>"><%= nextPage %></a>
+            <% } %>
+            <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+                <a href="?page=<%= lastPage %>">Last Page</a>
+            <% } %>
+        </section>
+</div>
+
+<%- include('includes/end.ejs') %>

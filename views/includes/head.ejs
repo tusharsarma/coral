@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= pageTitle %></title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/form.css">
+	
+    <script  type="text/javascript" src="/js/typeahead.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	console.log('callllll');
+    $('input.typeahead').typeahead({
+        name: 'typeahead',
+        remote: 'http://localhost:3000/s/search?key=%QUERY',
+        limit: 10
+    });
+});
+</script>
+
+    

@@ -1,0 +1,57 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="./css/search.css">
+<style>
+    .search{
+        color:white; 
+        text-align: center;
+        display:inline-block;
+        position:relative; 
+        left:50%; transform: 
+        translate(-50%,-50%); 
+        top:10px
+
+    }
+</style>
+</head>
+
+<body style="height:100vh; background-color: #7f5a83;
+background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+">
+    <%- include('includes/navigation.ejs') %>
+    <div class="page-header ">
+            <h2 class="search" style="">Search for Data...</h2>
+        </div>
+        <form action="/search" method="POST" id="form1">
+            <div class="bs-example">
+                <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false"
+                    placeholder="Type Email Id">
+                    <button class="btn btn-search" type="submit" form="form1" value="Submit"><i class="fa fa-search fa-fw"></i> Search</button>
+            </div>
+        </form>
+        <% if(user.length>0 || reRender== true || success) { %>
+        <div class="card">
+            <div class="container" style="margin-bottom: 40px">
+                <% if(user.length>0) { %>
+                <h4><b>Email: </b> <%= user[0].emailId || '' %> </h4>
+                <h4><b>User Name: </b> <%= user[0].userName || '' %> </h4>
+                <h4><b>Phone No: </b> <%= user[0].phoneNo || ''%> </h4>
+                <h4><b>Password: </b> <%= user[0].password || '' %> </h4>
+                <h4><b>Date: </b> <% if(user[0].dateTime) { %> <% dateTime=user[0].dateTime.toString().split('GMT')[0] %> <%= dateTime %> <% } %></h4>
+                <form action="/search/<%= user[0].emailId %>" method="POST">
+                    <div style="display:inline-block; position:absolute; left:50%; transform:translate(-50%,0%)">
+                        <input type=submit value="Delete" style="width:70px; background-color: black; color:white;border-radius: 10px" >
+                    </div>
+                
+                </form>
+                <%} else if(success) { %>
+                <h4><b><%= success %></b></h4>
+
+                <% } else if( reRender== true ){ %>
+                <h4> <b>No User found</b> </h4>
+                <%} %>
+
+            </div>
+        </div>
+        <% } %>
+
+<%- include('includes/end.ejs') %>

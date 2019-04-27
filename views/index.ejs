@@ -1,0 +1,50 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    <main>
+
+        <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+            <div class="wrapper wrapper--w780">
+                    <% if (validationErrors.length>0) { %>
+                        <h3 style="text-align: center">Invalid Input</h3>
+                        <div class="user-message user-message--error"><% for(error of validationErrors) { %> <%= error.msg %> <br>
+                        <% } %>
+                    </div>
+                    <%} else if (errorMessage) { %>
+                        <h3 style="text-align: center">Invalid Input</h3>
+                        <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <% } else if(success) { %>
+                        <div class="user-message" style="background: skyblue; color:black"><h4><%= success %></h4></div>
+                        <% } %>
+                <div class="card card-3">
+                    <div class="card-heading"></div>
+                    <div class="card-body">
+                        <h2 class="title">Input Field</h2>
+                        <form method="POST">
+                            <div class="input-group">
+                                <input  type="text" placeholder="User Name" name="name" class="<%= validationErrors.find(e => e.param === 'name') ? 'invalid input--style-3' : 'input--style-3' %>" value="<%= oldInput.name%>">
+                            </div>
+                            <div class="input-group">
+                                <input type="password" placeholder="Password" name="password" class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid input--style-3' : 'input--style-3' %>" value="<%= oldInput.password %>">
+                            </div>
+                            <div class="input-group">
+                                <input type="email" placeholder="Email" name="email" class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid input--style-3' : 'input--style-3' %>" value="<%= oldInput.email %>">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" placeholder="Phone" name="phone" class="<%= validationErrors.find(e => e.param === 'phone') ? 'invalid input--style-3' : 'input--style-3' %>" value="<%= oldInput.phone %>">
+                            </div>
+                            <div class="p-t-10">
+                                <button class="btn btn--pill btn--green" type="submit" name="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+        
+<%- include('includes/end.ejs') %>
